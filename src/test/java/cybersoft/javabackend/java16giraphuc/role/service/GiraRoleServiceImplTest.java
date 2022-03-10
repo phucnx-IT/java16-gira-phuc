@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +17,17 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 public class GiraRoleServiceImplTest {
 	@Autowired
 private GiraRoleServiceImpl implement;
-//	@Test
-//	public void canNotSaveRole() {
-//		GiraRoleDTO dto = new GiraRoleDTO();
-//		dto.setCode("COUNT");
-//		dto.setDescription("H");
-//		GiraRole role = implement.save(dto);
-//		assertTrue(role!=null);
-//	}
-//	@Test
-//	public void canNotFindAllRole() {
-//		List<GiraRole> role = implement.findAllEntity();
-//		assertTrue(role.size()>0);
-//	}
+	@Test
+	public void canNotSaveRole() {
+		GiraRoleDTO dto = new GiraRoleDTO();
+		dto.setCode("COUNT");
+		dto.setDescription("H");
+		GiraRole role = implement.save(dto);
+		assertTrue(role!=null);
+	}
+	@Test
+	public void canNotFindAllRole() {
+		List<GiraRole> role = implement.findAllEntity();
+		assertTrue(role.size()>0);
+	}
 }
