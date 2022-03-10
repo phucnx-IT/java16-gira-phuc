@@ -18,17 +18,17 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 public class GiraRoleServiceTest {
 	@Autowired
 	private GiraRoleService service;
-	@Test
-public void shouldNotSaveGiraRole() {
-	GiraRoleDTO dto = new GiraRoleDTO();
-	dto.setCode("ADMIN");
-	dto.setDescription("Hello");
-	GiraRole role = service.save(dto);
-	assertTrue(role!=null);
-}
-	@Test
-	public void canNotFindAll() {
-		List<GiraRole> role = service.findAllEntity();
-		assertTrue(role.size()>0);
-	}
+//	@Test
+//public void shouldNotSaveGiraRole() {
+//	GiraRoleDTO dto = new GiraRoleDTO();
+//	dto.setCode("ADMIN");
+//	dto.setDescription("Hello");
+//	GiraRole role = service.save(dto);
+//	assertTrue(role!=null);
+//}
+//	@Test
+//	public void canNotFindAll() {
+//		List<GiraRole> role = service.findAllEntity();
+//		assertTrue(role.size()>0);
+//	}
 }
