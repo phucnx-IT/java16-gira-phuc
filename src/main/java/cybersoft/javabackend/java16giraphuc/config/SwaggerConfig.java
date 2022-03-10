@@ -21,7 +21,7 @@ public class SwaggerConfig {
 						.build().apiInfo(new ApiInfoBuilder().title("Gira Application")
 								.version("1.0.0")
 								.description("This project is used for education purpose only.")
-								.contact(new Contact("Xuan Phuc", "https://phucnx.dev/", "phucnx.phar@gmail.com"))
+								.contact(new Contact("Xuan Phuc", "https://www.facebook.com/nguyenxuanphuc.nguyen.1/", "phucnx.phar@gmail.com"))
 								.build());
 	}
 }
