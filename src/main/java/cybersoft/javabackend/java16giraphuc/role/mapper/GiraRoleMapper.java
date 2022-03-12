@@ -10,4 +10,5 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 public interface GiraRoleMapper {
 	GiraRoleMapper INSTANCE = Mappers.getMapper(GiraRoleMapper.class);
 	GiraRole mapToEntity(GiraRoleDTO dto);
+	GiraRoleDTO mapToDTO(GiraRole role);
 }

@@ -1,4 +1,4 @@
-package cybersoft.javabackend.java16giraphuc.controller;
+package cybersoft.javabackend.java16giraphuc.role.controller;
 
 import java.util.Collections;
 import java.util.List;
