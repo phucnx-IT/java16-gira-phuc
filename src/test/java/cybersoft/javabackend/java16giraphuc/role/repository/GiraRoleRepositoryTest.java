@@ -1,7 +1,6 @@
 package cybersoft.javabackend.java16giraphuc.role.repository;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 
@@ -22,15 +21,15 @@ public class GiraRoleRepositoryTest {
 	@Test
 	public void shouldNotInsertRole() {
 		GiraRole role = GiraRole.builder()
-								.code("ADMIN")
+								.code("COUNT")
 								.description("nothing")
 								.build();
-		assertThatNoException().isThrownBy(()->repository.save(role));
+		assertFalse(repository.save(role)==null);
 	}
 	
 	@Test
 	public void canNotFindAllRole() {
 		List<GiraRole> role = repository.findAll();
-		assertTrue(role.size()>0);
+		assertFalse(role.size()<0);
 	}
 }

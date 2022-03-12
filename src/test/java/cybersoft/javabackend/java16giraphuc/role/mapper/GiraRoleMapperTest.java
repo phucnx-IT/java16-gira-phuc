@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java16giraphuc.role.mapper;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,6 @@ public void shouldNotMapperRoleDto() {
 	dto.setCode("FIVES");
 	dto.setDescription("Description");
 	GiraRole role = GiraRoleMapper.INSTANCE.mapToEntity(dto);
-	assertTrue(role!=null);
+	assertFalse(role==null);
 }
 }
