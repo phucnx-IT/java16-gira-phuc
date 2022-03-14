@@ -30,39 +30,42 @@ import cybersoft.javabackend.java16giraphuc.role.service.GiraRoleService;
 @RestController
 @RequestMapping
 public class GiraRoleController {
-@Autowired
-private GiraRoleService service;
+	@Autowired
+	private GiraRoleService service;
 
-@GetMapping
-public Object findAllRole() {
-	List<GiraRoleDTO> roles = service.findAllEntity();
-	if (roles.isEmpty()) {
-		return ResponseHelper.getErrorResponse("We don't have any roles", HttpStatus.NO_CONTENT);
+	@GetMapping
+	public Object findAllRole() {
+		List<GiraRoleDTO> roles = service.findAllEntity();
+		if (roles.isEmpty()) {
+			return ResponseHelper.getErrorResponse("We don't have any roles", HttpStatus.NO_CONTENT);
+		}
+		return ResponseHelper.getResponse(roles, HttpStatus.FOUND);
 	}
-	return ResponseHelper.getResponse(roles, HttpStatus.FOUND);
-}
-@PostMapping
-public Object createNewRole(@Valid @RequestBody GiraRoleDTO dto, BindingResult bindingResult) {
-	if (bindingResult.hasErrors()) {
-		return ResponseHelper.getErrorResponse(bindingResult, HttpStatus.BAD_REQUEST);
+
+	@PostMapping
+	public Object createNewRole(@Valid @RequestBody GiraRoleDTO dto, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return ResponseHelper.getErrorResponse(bindingResult, HttpStatus.BAD_REQUEST);
+		}
+		GiraRoleDTO createdRole = service.save(dto);
+		return ResponseHelper.getResponse(createdRole, HttpStatus.ACCEPTED);
 	}
-	GiraRoleDTO createdRole = service.save(dto);
-	return ResponseHelper.getResponse(createdRole, HttpStatus.ACCEPTED);
-}
-@PutMapping
-public Object updateRole(@Valid @RequestBody GiraRoleDTO dto, BindingResult result) {
-	if (result.hasErrors()) {
-		return ResponseHelper.getErrorResponse(result, HttpStatus.BAD_REQUEST);
+
+	@PutMapping
+	public Object updateRole(@Valid @RequestBody GiraRoleDTO dto, BindingResult result) {
+		if (result.hasErrors()) {
+			return ResponseHelper.getErrorResponse(result, HttpStatus.BAD_REQUEST);
+		}
+		GiraRoleDTO updateRole = service.updateRole(dto);
+		return ResponseHelper.getResponse(updateRole, HttpStatus.ACCEPTED);
 	}
-	GiraRoleDTO updateRole = service.updateRole(dto);
-	return ResponseHelper.getResponse(updateRole, HttpStatus.ACCEPTED);
-}
-@DeleteMapping("/delete/{role-Id}")
-public Object deleteRole(@PathVariable(name = "role-Id") String roleId) {
-	if (ErrorHelper.checkId(roleId)) {
-		service.deleteRole(roleId);
-		return ResponseHelper.getResponse("Deleted !", HttpStatus.OK);
+
+	@DeleteMapping("/delete/{role-Id}")
+	public Object deleteRole(@PathVariable(name = "role-Id") String roleId) {
+		if (ErrorHelper.checkId(roleId)) {
+			service.deleteRoleById(roleId);
+			return ResponseHelper.getResponse("Deleted !", HttpStatus.OK);
+		}
+		return ResponseHelper.getErrorResponse("RoleId is incorrect !", HttpStatus.BAD_REQUEST);
 	}
-	return ResponseHelper.getErrorResponse("RoleId is incorrect !", HttpStatus.BAD_REQUEST);	
-}
 }

@@ -52,7 +52,7 @@ public class GiraRoleServiceImpl implements GiraRoleService {
 	}
 
 	@Override
-	public void deleteRole(String roleId) {
+	public void deleteRoleById(String roleId) {
 		repository.deleteById(UUID.fromString(roleId));
 	}
 }
