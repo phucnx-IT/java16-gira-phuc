@@ -12,6 +12,6 @@ public interface GiraRoleService {
 
 	GiraRoleDTO updateRole(GiraRoleDTO dto);
 
-	void deleteRole(String roleId);
+	void deleteRoleById(String roleId);
 
 }
