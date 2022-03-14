@@ -22,12 +22,12 @@ private GiraRoleServiceImpl implement;
 		GiraRoleDTO dto = new GiraRoleDTO();
 		dto.setCode("COUNT");
 		dto.setDescription("H");
-		GiraRole role = implement.save(dto);
+		GiraRoleDTO role = implement.save(dto);
 		assertTrue(role!=null);
 	}
 	@Test
 	public void canNotFindAllRole() {
-		List<GiraRole> role = implement.findAllEntity();
+		List<GiraRoleDTO> role = implement.findAllEntity();
 		assertTrue(role.size()>0);
 	}
 }

@@ -23,12 +23,12 @@ public void shouldNotSaveGiraRole() {
 	GiraRoleDTO dto = new GiraRoleDTO();
 	dto.setCode("ADMIN");
 	dto.setDescription("Hello");
-	GiraRole role = service.save(dto);
+	GiraRoleDTO role = service.save(dto);
 	assertTrue(role!=null);
 }
 	@Test
 	public void canNotFindAll() {
-		List<GiraRole> role = service.findAllEntity();
+		List<GiraRoleDTO> role = service.findAllEntity();
 		assertTrue(role.size()>0);
 	}
 }

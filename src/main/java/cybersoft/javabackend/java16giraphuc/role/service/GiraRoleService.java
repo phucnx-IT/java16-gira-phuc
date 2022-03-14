@@ -6,8 +6,12 @@ import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleDTO;
 import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 
 public interface GiraRoleService {
-	List<GiraRole> findAllEntity();
+	List<GiraRoleDTO> findAllEntity();
 
-	GiraRole save(GiraRoleDTO dto);
+	GiraRoleDTO save(GiraRoleDTO dto);
+
+	GiraRoleDTO updateRole(GiraRoleDTO dto);
+
+	void deleteRole(String roleId);
 
 }
