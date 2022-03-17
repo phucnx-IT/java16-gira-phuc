@@ -1,13 +1,11 @@
 package cybersoft.javabackend.java16giraphuc.role.service;
 
-import static org.mockito.Mockito.spy;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
