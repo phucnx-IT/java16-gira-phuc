@@ -23,7 +23,9 @@ import cybersoft.javabackend.java16giraphuc.common.util.ResponseHelper;
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraGroupDTO;
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraGroupWithRolesDTO;
 import cybersoft.javabackend.java16giraphuc.role.service.GiraGroupService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/groups")
 public class GiraGroupController {
@@ -32,10 +34,14 @@ public class GiraGroupController {
 
 	@GetMapping
 	public Object findAllGroup() {
+		log.info("Find all gira groups STARTED");
+		log.debug("Calling GiraGroupService.findAllDto()");
 		List<GiraGroupDTO> groups = service.findAll();
+		log.debug("result:{}", groups);
+		log.info("Find all gira groups STOP");
 		return ResponseHelper.getResponse(groups, HttpStatus.FOUND);
 	}
-	
+
 	@GetMapping("/find-all-groups-with-roles")
 	public Object findAllGroupsWithRoles() {
 		List<GiraGroupWithRolesDTO> groupWithRoles = service.findAllGroupsWithRoles();
@@ -59,16 +65,16 @@ public class GiraGroupController {
 		GiraGroupDTO updatedGroup = service.updatedGiraGroup(dto);
 		return ResponseHelper.getResponse(updatedGroup, HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/delete/{group-id}")
-	public Object deleteGiraGroup(@PathVariable (name = "group-id") String groupId) {
+	public Object deleteGiraGroup(@PathVariable(name = "group-id") String groupId) {
 		if (ErrorHelper.checkId(groupId)) {
 			GiraGroupDTO dto = service.findGroupById(groupId);
 			if (dto != null) {
 				service.deleteGroupById(groupId);
 				return ResponseHelper.getResponse("Completed delete group", HttpStatus.OK);
-			}else {
-			return ResponseHelper.getErrorResponse("Can't find any groups with the Id", HttpStatus.BAD_REQUEST);
+			} else {
+				return ResponseHelper.getErrorResponse("Can't find any groups with the Id", HttpStatus.BAD_REQUEST);
 			}
 		}
 		return ResponseHelper.getErrorResponse("Id is not valid", HttpStatus.BAD_REQUEST);
@@ -99,14 +105,14 @@ public class GiraGroupController {
 		}
 		return ResponseHelper.getResponse(removeGroup, HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/remove-all-roles/{group-id}")
-	public Object removeAllRole(@PathVariable (name = "group-id") String groupId) {
+	public Object removeAllRole(@PathVariable(name = "group-id") String groupId) {
 		if (ErrorHelper.checkId(groupId)) {
 			GiraGroupWithRolesDTO removeAllRoles = service.removeAllRoles(groupId);
 			if (removeAllRoles != null) {
 				return ResponseHelper.getResponse("Completed remove roles in group", HttpStatus.OK);
-			}else {
+			} else {
 				return ResponseHelper.getErrorResponse("Group is not exist", HttpStatus.BAD_REQUEST);
 			}
 		}

@@ -42,15 +42,6 @@ public class GiraGroupServiceImplTest{
 		GiraGroupWithRolesDTO dtoWithRole = service.addRole(groupID, roleID);
 		assertTrue(dtoWithRole !=null);
 	}
-
-	@Test
-	public void removeRole() {
-		String groupID = "20d4cfb2-6d45-437a-a9d3-75d7e9b60b3f";
-		String roleID = "11effe87-e5b7-4982-a445-3dce7f6a5d55";
-		GiraGroupWithRolesDTO dtoWithRole = service.removeRole(groupID, roleID);
-		assertTrue(dtoWithRole !=null);
-	}
-
 	@Test
 	public void updatedGiraGroup() {
 		dto = new GiraGroupDTO();
@@ -73,5 +64,11 @@ public class GiraGroupServiceImplTest{
 		List<GiraGroupWithRolesDTO> list = service.findAllGroupsWithRoles();
 		assertTrue(list.size()>0);
 	}
-
+	@Test
+	public void removeRole() {
+		String groupID = "20d4cfb2-6d45-437a-a9d3-75d7e9b60b3f";
+		String roleID = "11effe87-e5b7-4982-a445-3dce7f6a5d55";
+		GiraGroupWithRolesDTO dtoWithRole = service.removeRole(groupID, roleID);
+		assertTrue(dtoWithRole !=null);
+	}
 }
