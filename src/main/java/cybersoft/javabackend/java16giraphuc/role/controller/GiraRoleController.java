@@ -28,7 +28,7 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 import cybersoft.javabackend.java16giraphuc.role.service.GiraRoleService;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/roles")
 public class GiraRoleController {
 	@Autowired
 	private GiraRoleService service;
