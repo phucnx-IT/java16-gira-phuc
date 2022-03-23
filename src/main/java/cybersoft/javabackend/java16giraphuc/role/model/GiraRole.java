@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java16giraphuc.role.model;
 
 import java.util.LinkedHashSet;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,13 +10,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import cybersoft.javabackend.java16giraphuc.common.model.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -28,6 +29,5 @@ public class GiraRole extends BaseEntity{
 	@NotBlank
 	private String description;
 	@ManyToMany(mappedBy = "roles")
-	@JsonIgnore
 	private Set<GiraGroup> groups = new LinkedHashSet<GiraGroup>();
 }

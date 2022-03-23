@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/groups")
+@RequestMapping("/api/v1/groups")
 public class GiraGroupController {
 	@Autowired
 	private GiraGroupService service;
@@ -50,10 +50,10 @@ public class GiraGroupController {
 
 	@PostMapping
 	public Object createGiraGroup(@Valid @RequestBody GiraGroupDTO dto, BindingResult result) {
-		GiraGroupDTO newGroup = service.createNewGroup(dto);
 		if (result.hasErrors()) {
 			return ResponseHelper.getErrorResponse(result, HttpStatus.BAD_REQUEST);
 		}
+		GiraGroupDTO newGroup = service.createNewGroup(dto);
 		return ResponseHelper.getResponse(newGroup, HttpStatus.ACCEPTED);
 	}
 
