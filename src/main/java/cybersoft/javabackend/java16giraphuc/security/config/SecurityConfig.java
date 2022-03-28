@@ -7,25 +7,28 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import cybersoft.javabackend.java16giraphuc.security.jwt.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private JwtAuthorizationFilter filter;
 
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -46,7 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//CSRF
 		http.csrf().disable();
 		//API AUTHENTICATION
-		http.antMatcher("/api/v1/**").authorizeRequests().anyRequest().authenticated();
+		http.antMatcher("/api/v1/**").authorizeRequests()
+		.antMatchers("/api/v1/auth/login").permitAll()
+		.antMatchers("/api/v1/users").permitAll()
+		.anyRequest().authenticated();
+		//API FILTER
+		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	
