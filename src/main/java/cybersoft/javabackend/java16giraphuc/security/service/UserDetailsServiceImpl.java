@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 		GiraUser currentUser = userOpt.get();
 		
 		
-		return new User(currentUser.getUsername(), currentUser.getPassword(), getGrantedAuthorities(currentUser));
+		return new User(currentUser.getUsername(), currentUser.getPassword(), getGrantedAuthorities(currentUser) );
 	}
 	private List<GrantedAuthority> getGrantedAuthorities(GiraUser user){
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
