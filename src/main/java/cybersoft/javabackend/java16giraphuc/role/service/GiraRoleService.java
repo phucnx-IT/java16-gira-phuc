@@ -10,8 +10,10 @@ public interface GiraRoleService {
 
 	GiraRoleDTO save(GiraRoleDTO dto);
 
-	GiraRoleDTO updateRole(GiraRoleDTO dto);
+	GiraRoleDTO updateRole(String id, GiraRoleDTO dto);
 
 	void deleteRoleById(String roleId);
+
+	GiraRoleDTO findById(String id);
 
 }

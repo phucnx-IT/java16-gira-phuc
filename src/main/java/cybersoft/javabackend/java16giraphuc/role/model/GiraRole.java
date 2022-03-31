@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name="gira_role")
 public class GiraRole extends BaseEntity{
-	@Size(min = 5,max = 5)
+	@Size(min = 5,max = 100)
 	private String code;
 	@NotBlank
 	private String description;

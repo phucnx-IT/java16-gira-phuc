@@ -16,7 +16,6 @@ public class GiraRoleMapperTest {
 	@Test
 public void mapToEntity() {
 	GiraRoleDTO dto = new GiraRoleDTO();
-	dto.setId(UUID.fromString("20d4cfb2-6d45-437a-a9d3-75d7e9b60b3f"));
 	dto.setCode("FIVES");
 	dto.setDescription("Description");
 	GiraRole role = GiraRoleMapper.INSTANCE.mapToEntity(dto);
