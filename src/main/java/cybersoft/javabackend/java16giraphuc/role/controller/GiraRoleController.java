@@ -51,15 +51,6 @@ public class GiraRoleController {
 		return ResponseHelper.getResponse(createdRole, HttpStatus.ACCEPTED);
 	}
 
-	@PutMapping
-	public Object updateRole(@Valid @RequestBody GiraRoleDTO dto, BindingResult result) {
-		if (result.hasErrors()) {
-			return ResponseHelper.getErrorResponse(result, HttpStatus.BAD_REQUEST);
-		}
-		GiraRoleDTO updateRole = service.updateRole(dto);
-		return ResponseHelper.getResponse(updateRole, HttpStatus.ACCEPTED);
-	}
-
 	@DeleteMapping("/delete/{role-Id}")
 	public Object deleteRole(@PathVariable(name = "role-Id") String roleId) {
 		if (ErrorHelper.checkId(roleId)) {
@@ -67,5 +58,30 @@ public class GiraRoleController {
 			return ResponseHelper.getResponse("Deleted !", HttpStatus.OK);
 		}
 		return ResponseHelper.getErrorResponse("RoleId is incorrect !", HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/{role-id}")
+	public Object updateRole(@Valid @RequestBody GiraRoleDTO dto,BindingResult result,@PathVariable(name = "role-id") String id) {
+		if (result.hasErrors()) {
+			return ResponseHelper.getErrorResponse(result, HttpStatus.BAD_REQUEST);
+		}
+		if (ErrorHelper.checkId(id)) {
+			GiraRoleDTO updateRole = service.updateRole(id,dto);
+			if (updateRole !=null) {
+				return ResponseHelper.getResponse(updateRole, HttpStatus.ACCEPTED);
+			}else {
+				return ResponseHelper.getErrorResponse("Code has been existed", HttpStatus.BAD_REQUEST);
+			}
+		}
+		return ResponseHelper.getErrorResponse("Id is not valid", HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("{role-Id}")
+	public Object findById(@PathVariable(name="role-Id") String id) {
+		if (ErrorHelper.checkId(id)) {
+			GiraRoleDTO dto = service.findById(id);
+			return ResponseHelper.getResponse(dto,	HttpStatus.OK);
+		}
+		return ResponseHelper.getErrorResponse("Id is not valid",HttpStatus.BAD_REQUEST);
 	}
 }

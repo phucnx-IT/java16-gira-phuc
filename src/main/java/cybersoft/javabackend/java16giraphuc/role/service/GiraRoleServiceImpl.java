@@ -1,10 +1,15 @@
 package cybersoft.javabackend.java16giraphuc.role.service;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleDTO;
@@ -36,23 +41,36 @@ public class GiraRoleServiceImpl implements GiraRoleService {
 	}
 
 	@Override
-	public GiraRoleDTO updateRole(GiraRoleDTO dto) {
-		GiraRole role=null;
-		try {
-			role = repository.findById(dto.getId()).orElse(null);
-		} catch (IllegalArgumentException e) {
-		}
-		if (role!=null) {
-			role.setCode(dto.getCode());
-			role.setDescription(dto.getDescription());
-			repository.save(role);
-			return GiraRoleMapper.INSTANCE.mapToDTO(role);
-		}
-		return null;
-	}
-
-	@Override
 	public void deleteRoleById(String roleId) {
 		repository.deleteById(UUID.fromString(roleId));
+	}
+	
+	@Override
+	public GiraRoleDTO updateRole(String id, GiraRoleDTO dto) {
+		Optional<GiraRole> role= repository.findById(UUID.fromString(id));
+		
+		if (role.isEmpty()) {
+			return null;
+		}
+		GiraRole updateRole = role.get();
+		if (!updateRole.getCode().equals(dto.getCode())) {
+			Optional<GiraRole> existedRole = repository.findByCode(dto.getCode());
+			if (existedRole.isPresent()) {
+				return null;
+			}
+			updateRole.setCode(dto.getCode());
+		}
+		updateRole.setDescription(dto.getDescription());
+		return GiraRoleMapper.INSTANCE.mapToDTO(repository.save(updateRole));
+	}
+	
+	@Cacheable(cacheNames = "GiraRoleDTO", key = "#id")
+	@Override
+	public GiraRoleDTO findById(String id) {
+		Optional<GiraRole> role = repository.findById(UUID.fromString(id));
+		if (role.isEmpty()) {
+			return null;
+		}
+		return GiraRoleMapper.INSTANCE.mapToDTO(role.get());
 	}
 }
