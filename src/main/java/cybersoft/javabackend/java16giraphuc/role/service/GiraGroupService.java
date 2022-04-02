@@ -18,4 +18,5 @@ void deleteGroupById(String groupId);
 GiraGroupWithRolesDTO removeAllRoles(String groupId);
 GiraGroupDTO findGroupById(String groupId);
 List<GiraGroupWithRolesDTO> findAllGroupsWithRoles();
+GiraGroupWithRolesDTO findGroupWithRoleById(String id);
 }
