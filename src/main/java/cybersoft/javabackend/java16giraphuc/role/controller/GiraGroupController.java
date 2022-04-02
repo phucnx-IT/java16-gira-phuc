@@ -118,4 +118,15 @@ public class GiraGroupController {
 		}
 		return ResponseHelper.getErrorResponse("Id is not valid", HttpStatus.BAD_REQUEST);
 	}
+	
+	@GetMapping("{group-id}")
+	public Object findGroupWithRoleById(@PathVariable("group-id") String id) {
+		if (ErrorHelper.checkId(id)) {
+			GiraGroupWithRolesDTO dto = service.findGroupWithRoleById(id);
+			if (dto !=null) {
+				return ResponseHelper.getResponse(dto, HttpStatus.ACCEPTED);
+			} 
+		}
+		return ResponseHelper.getErrorResponse("Id is not valid", HttpStatus.BAD_REQUEST);
+	}
 }
