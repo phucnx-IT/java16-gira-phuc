@@ -1,16 +1,11 @@
 package cybersoft.javabackend.java16giraphuc.role.controller;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import cybersoft.javabackend.java16giraphuc.common.util.ErrorHelper;
 import cybersoft.javabackend.java16giraphuc.common.util.ResponseHelper;
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleDTO;
-import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 import cybersoft.javabackend.java16giraphuc.role.service.GiraRoleService;
 
 @RestController
@@ -80,8 +74,11 @@ public class GiraRoleController {
 	public Object findById(@PathVariable(name="role-Id") String id) {
 		if (ErrorHelper.checkId(id)) {
 			GiraRoleDTO dto = service.findById(id);
+			if (dto==null) {
+				return ResponseHelper.getErrorResponse("Role is not exist", HttpStatus.BAD_REQUEST);
+			}
 			return ResponseHelper.getResponse(dto,	HttpStatus.OK);
 		}
-		return ResponseHelper.getErrorResponse("Id is not valid",HttpStatus.BAD_REQUEST);
+		return ResponseHelper.getErrorResponse("Id is not valid",HttpStatus.NOT_ACCEPTABLE);
 	}
 }

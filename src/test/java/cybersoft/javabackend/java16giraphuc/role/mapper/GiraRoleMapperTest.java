@@ -14,14 +14,6 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 @SpringBootTest
 public class GiraRoleMapperTest {
 	@Test
-public void mapToEntity() {
-	GiraRoleDTO dto = new GiraRoleDTO();
-	dto.setCode("FIVES");
-	dto.setDescription("Description");
-	GiraRole role = GiraRoleMapper.INSTANCE.mapToEntity(dto);
-	assertFalse(role==null);
-}
-	@Test
 public void mapToDto() {
 	GiraRole role = new GiraRole();
 	role.setId(UUID.fromString("20d4cfb2-6d45-437a-a9d3-75d7e9b60b3f"));
