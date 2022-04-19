@@ -1,6 +1,6 @@
 package cybersoft.javabackend.java16giraphuc.role.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.UUID;

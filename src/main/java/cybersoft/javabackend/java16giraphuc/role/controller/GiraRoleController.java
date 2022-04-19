@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cybersoft.javabackend.java16giraphuc.common.util.ErrorHelper;
 import cybersoft.javabackend.java16giraphuc.common.util.ResponseHelper;
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleDTO;
+import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleWithProgramDTO;
 import cybersoft.javabackend.java16giraphuc.role.service.GiraRoleService;
 
 @RestController
@@ -80,5 +82,15 @@ public class GiraRoleController {
 			return ResponseHelper.getResponse(dto,	HttpStatus.OK);
 		}
 		return ResponseHelper.getErrorResponse("Id is not valid",HttpStatus.NOT_ACCEPTABLE);
+	}
+	@PostMapping("/add-program/{role-id}/{program-id}")
+	public Object addProgramIntoRole(@PathVariable(name="role-id") String roleId, @PathVariable(name="program-id") String programId) {
+		if (ErrorHelper.checkId(programId)&&ErrorHelper.checkId(roleId)) {
+			GiraRoleWithProgramDTO role = service.addProgramIntoRole(roleId,programId);
+			if (role!=null) {
+				return ResponseHelper.getResponse(role, HttpStatus.ACCEPTED);
+			}
+		}
+		return ResponseHelper.getErrorResponse("Id is not valid", HttpStatus.BAD_REQUEST);
 	}
 }
