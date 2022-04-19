@@ -34,14 +34,14 @@ public class GiraUserController {
 		GiraUserDTO newUser = service.addUser(dto);
 		return ResponseHelper.getResponse(newUser, HttpStatus.ACCEPTED);
 	}
-	@GetMapping("/{username}/roles")
-	public Object findUserWithRoles(@PathVariable("username") String username) {
-		List<GiraUserRolesDTO> userRoles = service.findUserWithRolesByUsername(username);
-		if (userRoles == null) {
-			return ResponseHelper.getErrorResponse("Username is not existed",HttpStatus.BAD_GATEWAY);
-		}
-		return ResponseHelper.getResponse(userRoles, HttpStatus.OK);
-	}
+//	@GetMapping("/{username}/roles")
+//	public Object findUserWithRoles(@PathVariable("username") String username) {
+//		List<GiraUserRolesDTO> userRoles = service.findUserWithRolesByUsername(username);
+//		if (userRoles == null) {
+//			return ResponseHelper.getErrorResponse("Username is not existed",HttpStatus.BAD_GATEWAY);
+//		}
+//		return ResponseHelper.getResponse(userRoles, HttpStatus.OK);
+//	}
 	
 	@GetMapping("/{username}/roles-by-join-query")
 	public Object findRolesByUsernameUsingJoin(@PathVariable ("username") String username) {

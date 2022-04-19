@@ -11,8 +11,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleDTO;
+import cybersoft.javabackend.java16giraphuc.role.dto.GiraRoleWithProgramDTO;
 import cybersoft.javabackend.java16giraphuc.role.mapper.GiraRoleMapper;
+import cybersoft.javabackend.java16giraphuc.role.model.GiraProgram;
 import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
+import cybersoft.javabackend.java16giraphuc.role.repository.GiraProgramRepository;
 import cybersoft.javabackend.java16giraphuc.role.repository.GiraRoleRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class GiraRoleServiceImpl implements GiraRoleService {
 
 	@Autowired
 	private GiraRoleRepository repository;
+	
+	@Autowired
+	private GiraProgramRepository repositoryProgram;
 
 	@Override
 	public List<GiraRoleDTO> findAllEntity() {
@@ -70,5 +76,20 @@ public class GiraRoleServiceImpl implements GiraRoleService {
 			return null;
 		}
 		return GiraRoleMapper.INSTANCE.mapToDTO(role.get());
+	}
+
+	@Override
+	public GiraRoleWithProgramDTO addProgramIntoRole(String roleId, String programId) {
+		GiraRole role = repository.findById(UUID.fromString(roleId)).get();
+		GiraProgram program = repositoryProgram.findById(UUID.fromString(programId)).get();
+		if (role!=null && program !=null) {
+			if(role.getPrograms().stream().anyMatch(t -> t.getId().equals(program.getId()))) {
+				return null;
+			}
+			role.getPrograms().add(program);
+			GiraRole modifiedRole = repository.save(role);
+			return GiraRoleMapper.INSTANCE.mapToRoleWithProgram(modifiedRole);
+		}
+		return null;
 	}
 }

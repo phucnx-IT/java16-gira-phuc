@@ -57,10 +57,10 @@ public class GiraUserServiceImpl implements GiraUserService {
 											.username(user.getUsername())
 											.email(user.getEmail())
 											.displayName(user.getDisplayName())
-											.roles(gerRolesFromUser(user)).build();
+											.roles(getRolesFromUser(user)).build();
 	}
 
-	private List<GiraRoleDTO> gerRolesFromUser(GiraUser user) {
+	private List<GiraRoleDTO> getRolesFromUser(GiraUser user) {
 		List<GiraRoleDTO> roles = new ArrayList<>();
 		for (GiraGroup group : user.getGroups()) {
 			group.getRoles().forEach(t -> {

@@ -20,7 +20,7 @@ public interface GiraUserRepository extends JpaRepository<GiraUser, UUID> {
 
 	Optional<GiraUser> findByEmail(String email);
 
-	@Query("SELECT r.id, r.code, r.description FROM GiraUser u LEFT JOIN u.groups g LEFT JOIN g.roles r WHERE u.username =?1")
+	@Query("SELECT r.id, r.code, r.description FROM GiraUser u JOIN u.groups g JOIN g.roles r WHERE u.username =?1")
 	List<GiraUserRolesDTO> findUserWithRolesByUsername(String username);
 
 	@Query("SELECT u FROM GiraUser u LEFT JOIN u.groups g LEFT JOIN g.roles WHERE u.username=?1")

@@ -23,7 +23,7 @@ import cybersoft.javabackend.java16giraphuc.role.service.GiraRoleService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@WithMockUser
+@WithMockUser("moderator")
 public class GiraRoleControllerTest {
 	@MockBean
 	private GiraRoleService service;

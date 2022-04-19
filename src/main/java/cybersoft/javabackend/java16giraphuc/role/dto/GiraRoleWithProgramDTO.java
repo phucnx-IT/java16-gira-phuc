@@ -8,9 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GiraGroupWithRolesDTO {
+public class GiraRoleWithProgramDTO {
 	private UUID id;
 	private String code;
 	private String description;
-	private Set<GiraRoleDTO> roles;
+	private Set<GiraProgramDTO> programs;
 }
