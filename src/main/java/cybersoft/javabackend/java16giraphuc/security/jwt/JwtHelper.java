@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class JwtHelper {
+public class JwtHelper{
 	private String key = "whatissecrect";
 	String prefix = "Bearer ";
 

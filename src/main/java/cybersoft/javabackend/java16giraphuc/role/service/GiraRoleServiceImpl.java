@@ -17,7 +17,8 @@ import cybersoft.javabackend.java16giraphuc.role.model.GiraProgram;
 import cybersoft.javabackend.java16giraphuc.role.model.GiraRole;
 import cybersoft.javabackend.java16giraphuc.role.repository.GiraProgramRepository;
 import cybersoft.javabackend.java16giraphuc.role.repository.GiraRoleRepository;
-
+import lombok.extern.log4j.Log4j2;
+@Log4j2
 @Service
 public class GiraRoleServiceImpl implements GiraRoleService {
 
