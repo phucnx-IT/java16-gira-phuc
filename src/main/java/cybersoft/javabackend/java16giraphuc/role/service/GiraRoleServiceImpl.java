@@ -41,8 +41,8 @@ public class GiraRoleServiceImpl implements GiraRoleService {
 		if (role ==null) {
 		return null;	
 		}
-		GiraRole modifiedRole = repository.save(role);
-		return GiraRoleMapper.INSTANCE.mapToDTO(modifiedRole);
+		repository.save(role);
+		return GiraRoleMapper.INSTANCE.mapToDTO(role);
 	}
 
 	@Override

@@ -1,14 +1,14 @@
 package cybersoft.javabackend.java16giraphuc.role.mapper;
 
-import static org.junit.Assert.assertTrue;
+
+
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import cybersoft.javabackend.java16giraphuc.role.dto.GiraGroupDTO;
@@ -25,7 +25,7 @@ public void mapToEntity() {
 	dto.setCode("MANAGER");
 	dto.setDescription("Group of managers");
 	GiraGroup group = GiraGroupMapper.INSTANCE.mapToEntity(dto);
-	assertTrue(group!=null);
+	assertNotEquals(null, group);
 }
 @Test
 public void mapToDto() {
@@ -34,7 +34,7 @@ public void mapToDto() {
 	group.setCode("MANAGER");
 	group.setDescription("Group of managers");
 	GiraGroupDTO dto = GiraGroupMapper.INSTANCE.mapToGroupDTO(group);
-	assertTrue(dto!=null);
+	assertNotEquals(null, dto);
 }
 @Test
 public void mapToDtoWithRole() {
@@ -45,6 +45,6 @@ public void mapToDtoWithRole() {
 	group.setDescription("Group of managers");
 	group.setRoles(roles);
 	GiraGroupWithRolesDTO dtoWithRole = GiraGroupMapper.INSTANCE.toDtoWithRoles(group);
-	assertTrue(dtoWithRole!=null);
+	assertNotEquals(null, dtoWithRole);
 }
 }
